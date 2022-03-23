@@ -1,0 +1,5 @@
+
+
+class apiKey{
+  final key = {"api-key":"TEST;PK;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjYyMzQ2NTY2NjIwNDNmMDAyZTc2NzJiMSIsInVzZXJJZCI6IjYyMzQ1YzhiNjIwNDNmMDAyZTc2NzI4ZSIsImlhdCI6MTY0NzYwMDk5OH0.9Sg_ccidwAvHy_ZjtKXkMaZul_DL3-hNsiBKXQ8u1qg"};
+}

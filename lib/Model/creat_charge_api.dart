@@ -10,7 +10,7 @@ String the100PayToJson(The100Pay data) => json.encode(data.toJson());
 
 class The100Pay {
   The100Pay({
-    required this.billing,
+     required this.billing,
     required this.status,
     required this.refId,
     required this.chargeSource,
