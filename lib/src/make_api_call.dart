@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:hundredpay/src/hundred_pay_response_model.dart';
@@ -46,14 +47,15 @@ class MakeApiCall {
             "userId": userId,
             "charge_source": chargeSource
           }));
+      log(response.body);
 
       if (response.statusCode.toString()[0] == "2") {
         return HundredPayResponseModel.fromJson(jsonDecode(response.body));
       } else {
-        throw response.reasonPhrase!;
+        throw Exception(response.reasonPhrase!);
       }
     } on Exception catch (e) {
-      throw e.toString();
+      throw Exception(e.toString());
     }
   }
 }

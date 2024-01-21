@@ -5,28 +5,26 @@ import 'make_api_call.dart';
 import 'pay_ui.dart';
 
 class HundredPay {
+  static Future<HundredPayResponseModel>? s;
   static makePayment({
     required String customerEmail,
     required String customerPhoneNumber,
     required String customerName,
     required String customerUserId,
     required String amount,
-    String? userId,
-    String? refId,
-    required String? description,
-    required String? apiKey,
-    String? currency,
-    String? country,
-    String? chargeSource,
-    String? callBackUrl,
-    required Map? metadata,
+    required String userId,
+    required String refId,
+    required String description,
+    required String apiKey,
+    required String currency,
+    required String country,
+    required String chargeSource,
+    required String callBackUrl,
+    required Function(Object? error) onError,
+    Map? metadata,
     required BuildContext? context,
-    required void Function() onClosed,
-    required void Function() onSuccess,
   }) async {
-    if (apiKey == null) {
-      throw Exception("Please provide api key from the dashboard");
-    } else if (apiKey.isEmpty) {
+    if (apiKey.isEmpty) {
       throw Exception("Please provide api key from the dashboard");
     }
     if (context == null) {
@@ -38,21 +36,40 @@ class HundredPay {
     } else {
       metadata0 = metadata;
     }
+    s = MakeApiCall.makePayment(
+        amount: amount,
+        customerEmail: customerEmail,
+        customerPhoneNumber: customerPhoneNumber,
+        customerName: customerName,
+        customerUserId: customerUserId,
+        refId: refId,
+        description: description,
+        currency: currency,
+        country: country,
+        callBackUrl: callBackUrl,
+        metadata: metadata0,
+        chargeSource: chargeSource,
+        userId: userId,
+        apiKey: apiKey);
+    s!.onError((error, stackTrace) async {
+      onError(error);
+      throw error!;
+    });
     showWebviewModal(
       context: context,
       amount: amount,
-      callBackUrl: callBackUrl!,
+      callBackUrl: callBackUrl,
       metadata: metadata0,
       customerEmail: customerEmail,
       customerName: customerName,
       customerPhoneNumber: customerPhoneNumber,
       customerUserId: customerUserId,
-      refId: refId!,
-      description: description!,
-      chargeSource: chargeSource!,
-      country: country!,
+      refId: refId,
+      description: description,
+      chargeSource: chargeSource,
+      country: country,
       currency: country,
-      userId: userId!,
+      userId: userId,
       apiKey: apiKey,
     );
   }
@@ -94,24 +111,13 @@ class HundredPay {
               )),
           height: MediaQuery.of(context).size.height * 0.9,
           child: FutureBuilder<HundredPayResponseModel>(
-              future: MakeApiCall.makePayment(
-                  amount: amount,
-                  customerEmail: customerEmail,
-                  customerPhoneNumber: customerPhoneNumber,
-                  customerName: customerName,
-                  customerUserId: customerUserId,
-                  refId: refId,
-                  description: description,
-                  currency: currency,
-                  country: country,
-                  callBackUrl: callBackUrl,
-                  metadata: metadata,
-                  chargeSource: chargeSource,
-                  userId: userId,
-                  apiKey: apiKey),
+              future: s,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  throw snapshot.error!;
                 }
                 return PayUi(
                   url: snapshot.data!.hostedUrl!,
