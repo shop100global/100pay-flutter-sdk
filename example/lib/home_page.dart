@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         description: "For montly sub",
                         apiKey:
-                            'LIVE;PK;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjY1OTk5ZTc3NTU2MDMyMDAyYjJiNGZjMiIsInVzZXJJZCI6IjY1OTk5ZTc3NTU2MDMyMDAyYjJiNGZiZCIsImlhdCI6MTcwNDU2NjM5MX0.ruM185WGa6eUVRYum5EsNHn7h5oHgumPtsJPRt2ZjYk',
+                            '',
                         currency: 'NGN',
                         country: 'NG',
                         chargeSource: 'api',
