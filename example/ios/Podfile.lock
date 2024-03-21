@@ -1,0 +1,34 @@
+PODS:
+  - Flutter (1.0.0)
+  - hundredpay (0.0.1):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - hundredpay (from `.symlinks/plugins/hundredpay/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  hundredpay:
+    :path: ".symlinks/plugins/hundredpay/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  hundredpay: 3dfdc590776eb1c8e805feb97e6dc5b81b343b92
+  integration_test: 13825b8a9334a850581300559b8839134b124670
+  webview_flutter_wkwebview: be0f0d33777f1bfd0c9fdcb594786704dbf65f36
+
+PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+
+COCOAPODS: 1.15.2
