@@ -1,18 +1,19 @@
 name: hundredpay
 description: A Flutter plugin for making payments via 100Pay - Supports Android and ios. (100Pay Checkout)
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/shop100global/100pay-flutter-sdk
 repository: https://github.com/shop100global/100pay-flutter-sdk
 issue_tracker: https://github.com/shop100global/100pay-flutter-sdk/issues
-# dependencies: 
+# dependencies:
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  sdk: ">=3.0.6 <4.0.0"
   flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_spinkit: ^5.2.0
   http: ^1.1.0
   plugin_platform_interface: ^2.0.2
   webview_flutter: ^4.4.4
@@ -22,11 +23,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-
-
 # The following section is specific to Flutter packages.
 flutter:
-
   plugin:
     platforms:
       android:
@@ -40,5 +38,3 @@ flutter:
         pluginClass: HundredpayPlugin
       windows:
         pluginClass: HundredpayPluginCApi
-
-

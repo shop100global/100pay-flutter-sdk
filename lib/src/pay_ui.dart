@@ -42,7 +42,7 @@ class _PayUiState extends State<PayUi> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.9, // Set a fixed height
         child: WebViewWidget(
           gestureRecognizers: {

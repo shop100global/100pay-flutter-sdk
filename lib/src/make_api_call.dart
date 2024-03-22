@@ -1,6 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:io';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:hundredpay/src/hundred_pay_response_model.dart';
 
@@ -20,6 +24,7 @@ class MakeApiCall {
     required String chargeSource,
     required String userId,
     required String apiKey,
+    required BuildContext context, // Add context parameter
   }) async {
     try {
       var headers = {'api-key': apiKey, "Content-Type": "application/json"};
@@ -47,14 +52,63 @@ class MakeApiCall {
             "userId": userId,
             "charge_source": chargeSource
           }));
-      log(response.body);
 
       if (response.statusCode.toString()[0] == "2") {
         return HundredPayResponseModel.fromJson(jsonDecode(response.body));
       } else {
         throw Exception(response.reasonPhrase!);
       }
-    } on Exception catch (e) {
+    } on SocketException catch (_) {
+      // Show dialog for unstable network
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Stack(
+            children: [
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color:
+                      Colors.black.withOpacity(0.5), // Adjust opacity as needed
+                ),
+              ),
+              AlertDialog(
+                title: const Text('Network Unstable'),
+                content: const Text(
+                    'Please check your network connection and try again.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+      throw Exception(_.toString());
+    } catch (e) {
+      // Show dialog for other exceptions
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: const Text('An error occurred. Please try again later.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
       throw Exception(e.toString());
     }
   }
