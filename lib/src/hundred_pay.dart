@@ -92,6 +92,7 @@ class HundredPay {
     required String chargeSource,
     required String callBackUrl,
     required Function(Object? error) onError,
+    required Function({Object? completed}) onComplete,
     Map? metadata,
     required BuildContext context, // Change BuildContext? to BuildContext
   }) async {
@@ -129,6 +130,19 @@ class HundredPay {
       onError(error);
       throw error!;
     });
+    s?.whenComplete(() {
+      onComplete(completed: onComplete);
+      print('hello');
+      return onComplete;
+    });
+    // s!.whenComplete(() async{
+    //   onComplete();
+    //   return ;
+    // })
+    //   s!.onError((error, stackTrace) async {
+    //   onError(error);
+    //   throw error!;
+    // });
     showWebviewModal(
       context: context,
       amount: amount,

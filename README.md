@@ -31,11 +31,8 @@ defaultConfig {
     }
 ```
 
-
-
-
-
 ## Example
+
 ```dart
  HundredPay.makePayment(
                         customerEmail: emailController.text,
@@ -50,7 +47,13 @@ defaultConfig {
                         currency: 'NGN',
                         country: 'NG',
                         chargeSource: 'api',
+                        onError: (error) {
+
+                      },
                         callBackUrl: "callBackUrl",
+                         onComplete: ({completed}) {
+
+                      },
                         context: context);
 
 ```

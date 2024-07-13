@@ -68,25 +68,32 @@ class _HomePageState extends State<HomePage> {
                   final amount = int.parse(amountController.text);
                   try {
                     HundredPay.makePayment(
-                        customerEmail: emailController.text,
-                        customerPhoneNumber: '0800000000',
-                        customerName: 'customer',
-                        customerUserId: '111111',
-                        amount: '$amount',
-                        userId: '12345',
-                        refId: ref,
-                        onError: (error) {
-                          log(error.toString());
-                          Navigator.pop(context);
-                        },
-                        description: "For montly sub",
-                        apiKey:
-                            '',
-                        currency: 'NGN',
-                        country: 'NG',
-                        chargeSource: 'api',
-                        callBackUrl: "callBackUrl",
-                        context: context);
+                      customerEmail: emailController.text,
+                      customerPhoneNumber: '0800000000',
+                      customerName: 'customer',
+                      customerUserId: '111111',
+                      amount: '$amount',
+                      userId: '12345',
+                      refId: ref,
+                      onError: (error) {
+                        log(error.toString());
+                        Navigator.pop(context);
+                      },
+                      description: "For montly sub",
+                      apiKey:
+                          'LIVE;PK;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjY1OTlhNGY0NTU2MDMyMDAyYjJiNTFjZSIsInVzZXJJZCI6IjY1OTlhNGY0NTU2MDMyMDAyYjJiNTFjOSIsImlhdCI6MTcwNDU2ODA1Mn0.s4Cb2vUgyTeYhseZtMkqAlt8TE4nu2an_PTOA8ZSlwE',
+                      currency: 'NGN',
+                      country: 'NG',
+                      chargeSource: 'api',
+                      callBackUrl: "callBackUrl",
+                      context: context,
+                      onComplete: ({completed}) {
+                        String h = 'hello';
+                        print(completed);
+
+                        return h;
+                      },
+                    );
                   } catch (e) {
                     debugPrint(e.toString());
                   }
